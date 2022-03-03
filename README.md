@@ -12,6 +12,7 @@
         - [assertThrows](#assertthrows)
         - [assertAll](#assertall)
         - [assertNull](#assertnull)
+        - [assertArrayEquals](#assertarrayequals)
 
 <!-- /TOC -->
 
@@ -128,4 +129,26 @@ if you have multiple assertion, make sure they are in `assertAll(...);` otherwis
         assertNull(coderWithWorstBMI);
     }
 ```
+
+### assertArrayEquals
+```java
+    @Test
+    void should_ReturnCorrectBMIScoreArray_When_CoderListNotEmpty() {
+        // given
+        List<Coder> coders = new ArrayList<>();
+        coders.add(new Coder(1.80, 60.0));
+        coders.add(new Coder(1.82, 98.0));
+        coders.add(new Coder(1.82, 64.7));
+        double[] expected = {18.52, 29.59, 19.53};
+
+        // when
+        double[] bmiScore = BMICalculator.getBMIScores(coders);
+
+        // then
+        assertArrayEquals(expected, bmiScore);
+    }
+```
+comparing two arrays elements equality
+
+
 
