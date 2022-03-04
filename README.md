@@ -187,3 +187,98 @@ general method run before/after each time for each test
 ### @BeforeAll, @AfterAll
 general method run before/after once for tests in the testing class
 
+### @ParameterizedTest
+### @CsvSource()
+```java
+    @ParameterizedTest(name = "weight={0}, height={1}")
+    @CsvSource(value = {
+            "89.0, 1.72",
+            "95.0, 1.75",
+            "110.0, 1.78",
+    })
+    void should_ReturnTrue_When_DietRecommended3(double coderWeight, double coderHeight) {
+        // given
+
+        // when
+        boolean recommended = BMICalculator.isDietRecommended(coderWeight, coderHeight);
+
+        // then
+        assertTrue(recommended);
+    }
+```
+name us for the test results readability
+#### @ValueSource()
+```java
+    @ParameterizedTest
+    @ValueSource(doubles = {89.0, 95.0, 110.0})
+    void should_ReturnTrue_When_DietRecommended2(double coderWeight) {
+        // given
+        double height = 1.72;
+
+        // when
+        boolean recommended = BMICalculator.isDietRecommended(coderWeight, height);
+
+        // then
+        assertTrue(recommended);
+    }
+```
+3 tsts for 3 values
+### assertTimeout
+```java
+    @Test
+    void should_ReturnCoderWithWorstBMIWithIn1ms_WhenCoderListHas10000Elements() {
+        // given
+        List<Coder> coders = new ArrayList<>();
+        for (int i = 0; i < 10000; i++) {
+            coders.add(new Coder(1.0+i, 10.0+i));
+        }
+
+        // when
+        Executable executable = () -> BMICalculator.findCoderWithWorstBMI(coders);
+
+        // then
+        assertTimeout(Duration.ofMillis(500), executable);
+    }
+```
+performance test
+### assumeTrue
+skip test if assumeXXX false
+### @DisplayName("new name")
+change your test name display name
+### @Disabled
+skip your test
+### @Nested (new in jUnit5)
+group multiple tests methods into a class for better readability
+
+## Test Driven Design(TDD)
+- Increased code quality
+- Unit tests should always be ready as soon as you finish your implementation
+- Modern and agile approach
+
+## test coding style
+### class name
+A test class has a name that ends with Test, for example, HashIntegrationTest. If it covers a single class, its name is the name of that class plus Test, for example HashImplTest. [reference](https://google.github.io/styleguide/javaguide.html#s5.2.2-class-names)
+### test method name
+Underscores may appear in JUnit test method names to separate logical components of the name, with each component written in lowerCamelCase, for example transferMoney_deductsFromSource. There is no One Correct Way to name test methods. [reference](https://google.github.io/styleguide/javaguide.html#s5.2.3-method-names)
+
+three scenarios:
+```java
+public class xxxClassTest {
+    @Nested
+    class xxxMethodTest {
+        @Test
+        void should_ReturnXXX_When_YYY() {
+            // given
+            ...
+
+            // when
+            ...
+
+            // then
+            ...
+        }
+    }
+}
+```
+
+
