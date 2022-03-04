@@ -151,7 +151,10 @@ if you have multiple assertion, make sure they are in `assertAll(...);` otherwis
 comparing two arrays elements equality
 
 ## annotations
-### @BeforeEach, @AfterEach
+### testing lifecycle
+<img src="docs/1.png" width="40%" />
+
+#### @BeforeEach, @AfterEach
 ```java
     private DietPlanner dietPlanner;
 
@@ -184,7 +187,7 @@ comparing two arrays elements equality
     }
 ```
 general method run before/after each time for each test
-### @BeforeAll, @AfterAll
+#### @BeforeAll, @AfterAll
 general method run before/after once for tests in the testing class
 
 ### @ParameterizedTest
@@ -261,7 +264,7 @@ A test class has a name that ends with Test, for example, HashIntegrationTest. I
 ### test method name
 Underscores may appear in JUnit test method names to separate logical components of the name, with each component written in lowerCamelCase, for example transferMoney_deductsFromSource. There is no One Correct Way to name test methods. [reference](https://google.github.io/styleguide/javaguide.html#s5.2.3-method-names)
 
-three scenarios:
+three scenarios naming convention:
 ```java
 public class xxxClassTest {
     @Nested
