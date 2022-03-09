@@ -226,6 +226,23 @@ name us for the test results readability
     }
 ```
 3 tsts for 3 values
+#### @MethodSource("xxxMethodName")
+```java
+private static Stream<Arguments> generateArgumentsStream() {
+    List<Arguments> listOfArguments = new LinkedList<>();
+    listOfArguments.add(Arguments.of(generateTestList(100, min, max), intVal, longVal));
+    listOfArguments.add(Arguments.of(generateTestList(200, min, max), intVal, longVal));
+    listOfArguments.add(Arguments.of(generateTestList(300, min, max), intVal, longVal));
+    return listOfArguments.stream();
+}
+
+@ParameterizedTest
+@MethodSource("generateArgumentsStream")
+public void exampleTest(List<Integer> list, int intVal, long longVal) { }
+```
+use List as test case input
+
+> Notice: use MethodSource in @Nested class: https://stackoverflow.com/questions/47933755/junit5-methodsource-in-nested-class
 ### assertTimeout
 ```java
     @Test
